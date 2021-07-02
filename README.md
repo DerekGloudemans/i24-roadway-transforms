@@ -1,6 +1,6 @@
 # i24-roadway-transforms
 
-![](tforms/.png)
+![](tform/p1c1_im_lmcs_transform_points.png)
 
 First and foremost, I appologize the documentation for this is bad. I didn't have much time and eventually will make more workable instructions for using it. 
 
@@ -21,7 +21,7 @@ After drawing a line, you can enter the tick/lane number. For perpendicular line
 
 After you've labeled all of the perp/parallel lines, press q and the computed intersection points will be shown. Press q again and the computed grid based on the transform will be shown. Press q one more time to save the transform points and image.
 
-![](images_for_readme/3d_im.png)
+![](tform/p1c1_im_lmcs_transform_points.png)
 
 
 ### Viewing
