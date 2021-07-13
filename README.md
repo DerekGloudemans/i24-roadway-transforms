@@ -1,6 +1,6 @@
 # i24-roadway-transforms
 
-![](tform/p1c1_im_lmcs_transform_points.png)
+![](combined.png)
 
 First and foremost, I appologize the documentation for this is bad. I didn't have much time and eventually will make more workable instructions for using it. 
 
