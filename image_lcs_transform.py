@@ -140,6 +140,58 @@ class Transform_Labeler():
         self.cont = False
         self.save()
         
+    def load(self):
+        #try:    
+            im_pts = []
+            lmcs_pts = []
+            
+            name = "tform/" + self.directory.split("/")[-1].split("_")[1] + "_im_lmcs_transform_points.csv"
+            with open(name,"r") as f:
+                lines = f.readlines()
+                
+                for line in lines[1:-4]:
+                    line = line.rstrip("\n").split(",")
+                    im_pts.append ([float(line[0]),float(line[1])])
+                    lmcs_pts.append([int(line[2]),int(line[3])])
+
+            # plot computed points
+            self.cur_image = self.frames[self.frame-1].copy()
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            for idx in range(len(im_pts)):
+                pt = im_pts[idx]
+                label = str(lmcs_pts[idx])
+                self.cur_image = cv2.circle(self.cur_image,(int(pt[0]),int(pt[1])),2,(0,255,255),-1)
+                self.cur_image = cv2.circle(self.cur_image,(int(pt[0]),int(pt[1])),5,(0,255,255),1)
+                self.cur_image = cv2.putText(self.cur_image,label,((int(pt[0]),int(pt[1]))),font,0.5,(255,255,255),1)
+            cv2.imshow("computed_pts",self.cur_image)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
+            
+            
+            # compute transform
+            H,mask = cv2.findHomography(im_pts,lmcs_pts)
+            H_inv,mask_inv = cv2.findHomography(lmcs_pts,im_pts)
+            
+            test_points = []
+            for x in range(-500,2500,20):
+                for y in range(-240,240,12):
+                    test_points.append(np.array([x,y]))
+            test_points = np.stack(test_points)
+            
+            
+            test_points_tf = self.transform_pt_array(test_points,H_inv)
+            for idx,pt in enumerate(test_points_tf):
+                self.cur_image = cv2.circle(self.cur_image,(int(pt[0]),int(pt[1])),1,(255,255,255),-1)
+                #self.cur_image = cv2.putText(self.cur_image,str(test_points[idx]),((int(pt[0]),int(pt[1]))),font,0.25,(255,255,255),1)
+    
+            cv2.imshow("grid_pts",self.cur_image)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()                
+            
+        # except:
+        #     pass
+        
+        
     def save(self):
         im_pts, lmcs_pts = self.convert_to_matching_points()
 
@@ -319,9 +371,11 @@ class Transform_Labeler():
                self.undo()
            elif key == ord("d"):
                self.remove()
+           elif key == ord("l"):
+               self.load()
                       
 
-tfl  = Transform_Labeler("/home/worklab/Data/cv/video/5_min_18_cam_October_2020/ingest_session_00005/recording/record_p3c6_00000.mp4",ds = 2)
+tfl  = Transform_Labeler("/home/worklab/Data/cv/video/5_min_18_cam_October_2020/ingest_session_00005/recording/record_p1c6_00000.mp4",ds = 2)
 tfl.run()
 
 '''
