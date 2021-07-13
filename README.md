@@ -29,7 +29,7 @@ After you've computed several transforms, you can view how the camera fields of 
 
 ### Conversion from Local Roadway Marking Coordinate System to GPS
 Use these points for now:
-0,0        ->   36.005437, -86.610796
-0,48      ->   36.005532, -86.610684
-960,0    ->   36.002835, -86.607894
-960,48  ->   36.002927, -86.607780
+- 0,0      ->   36.005437, -86.610796
+- 0,48     ->   36.005532, -86.610684
+- 960,0    ->   36.002835, -86.607894
+- 960,48   ->   36.002927, -86.607780
