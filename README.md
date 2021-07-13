@@ -26,3 +26,10 @@ After you've labeled all of the perp/parallel lines, press q and the computed in
 
 ### Viewing
 After you've computed several transforms, you can view how the camera fields of view overlap using these transforms by running `show_transformed_ims.py`. Again, you'll need to change the directory to point to a folder that has video sequences for all of the camera fields of view you'd like to show. You should also adjust ds to be whatever downsampling ratio was used earlier.
+
+### Conversion from Local Roadway Marking Coordinate System to GPS
+Use these points for now:
+- 0,0      ->   36.005437, -86.610796
+- 0,48     ->   36.005532, -86.610684
+- 960,0    ->   36.002835, -86.607894
+- 960,48   ->   36.002927, -86.607780
